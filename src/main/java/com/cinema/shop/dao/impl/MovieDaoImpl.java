@@ -6,16 +6,18 @@ import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.Movie;
 import com.cinema.shop.util.HibernateUtil;
 import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
     @Override
     public Movie add(Movie movie) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
@@ -24,16 +26,21 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't process "
-                    + movie.getTitle() + " movie data", e);
+            throw new DataProcessingException("Can't insert Movie entity", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public List<Movie> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Movie> getAllMovies = session.createQuery("FROM Movie", Movie.class);
-            return getAllMovies.getResultList();
+            CriteriaQuery<Movie> criteriaQuery = session.getCriteriaBuilder()
+                    .createQuery(Movie.class);
+            criteriaQuery.from(Movie.class);
+            return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movies from DB", e);
         }

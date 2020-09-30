@@ -5,14 +5,13 @@ import com.cinema.shop.model.Movie;
 import com.cinema.shop.service.MovieService;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("<YOUR_PACKAGE>");
+    private static Injector injector = Injector.getInstance("com.cinema.shop");
 
     public static void main(String[] args) {
         Movie movie = new Movie();
-        movie.setTitle("Fast and Furious");
+        movie.setTitle("Mad Max");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movie);
-
         movieService.getAll().forEach(System.out::println);
     }
 }
