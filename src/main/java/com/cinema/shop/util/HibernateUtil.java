@@ -1,6 +1,5 @@
 package com.cinema.shop.util;
 
-import com.cinema.shop.exceptions.DataProcessingException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -14,7 +13,7 @@ public class HibernateUtil {
         try {
             return new Configuration().configure().buildSessionFactory();
         } catch (Exception e) {
-            throw new DataProcessingException("Error creating Session Factory", e);
+            throw new RuntimeException("Error creating Session Factory", e);
         }
     }
 
