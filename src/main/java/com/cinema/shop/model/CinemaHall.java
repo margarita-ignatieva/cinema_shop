@@ -1,7 +1,6 @@
 package com.cinema.shop.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "cinemaHalls")
@@ -10,9 +9,7 @@ public class CinemaHall {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int capacity;
-
-    @OneToMany
-    private List<MovieSession> movieSessions;
+    private String description;
 
     public Long getId() {
         return id;
@@ -30,11 +27,11 @@ public class CinemaHall {
         this.capacity = capacity;
     }
 
-    public List<MovieSession> getMovieSessions() {
-        return movieSessions;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMovieSessions(List<MovieSession> movieSessions) {
-        this.movieSessions = movieSessions;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -9,13 +9,10 @@ public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     private Movie movie;
-
     @ManyToOne
     private CinemaHall cinemaHall;
-
     private LocalDateTime showTime;
 
     public Long getId() {
