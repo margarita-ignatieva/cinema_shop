@@ -2,15 +2,15 @@ package com.cinema.shop.dao.impl;
 
 import com.cinema.shop.dao.CinemaHallDao;
 import com.cinema.shop.exceptions.DataProcessingException;
+import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.CinemaHall;
-import com.cinema.shop.model.Movie;
 import com.cinema.shop.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
+@Dao
 public class CinemaHallDaoImpl implements CinemaHallDao {
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
