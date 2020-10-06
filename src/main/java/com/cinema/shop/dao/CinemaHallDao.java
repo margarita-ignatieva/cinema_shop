@@ -1,7 +1,6 @@
 package com.cinema.shop.dao;
 
 import com.cinema.shop.model.CinemaHall;
-
 import java.util.List;
 
 public interface CinemaHallDao {

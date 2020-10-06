@@ -5,12 +5,12 @@ import com.cinema.shop.exceptions.DataProcessingException;
 import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.MovieSession;
 import com.cinema.shop.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {

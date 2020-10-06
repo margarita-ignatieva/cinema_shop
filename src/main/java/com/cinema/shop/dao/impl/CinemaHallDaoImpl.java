@@ -5,10 +5,10 @@ import com.cinema.shop.exceptions.DataProcessingException;
 import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.CinemaHall;
 import com.cinema.shop.util.HibernateUtil;
+import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import javax.persistence.criteria.CriteriaQuery;
-import java.util.List;
 
 @Dao
 public class CinemaHallDaoImpl implements CinemaHallDao {
