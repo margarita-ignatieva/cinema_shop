@@ -42,7 +42,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             criteriaQuery.from(CinemaHall.class);
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get CinemaHalls from DB", e);
+            throw new DataProcessingException("Can't get Cinema Halls from DB", e);
         }
     }
 }
