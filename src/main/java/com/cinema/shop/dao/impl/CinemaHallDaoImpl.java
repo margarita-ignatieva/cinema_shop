@@ -26,7 +26,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert Cinema Hall entity", e);
+            throw new DataProcessingException("Can't insert Cinema Hall" + cinemaHall, e);
         } finally {
             if (session != null) {
                 session.close();
