@@ -1,6 +1,12 @@
 package com.cinema.shop.model;
 
-import javax.persistence.*;
+import com.sun.istack.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
@@ -8,8 +14,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, name = "email")
+    @NotNull
     private String email;
+    @NotNull
     private String password;
+    private byte[] salt;
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -34,4 +52,20 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id
+                + ", email = " + email + ", password='"
+                + password + "}";
+    }
+
 }

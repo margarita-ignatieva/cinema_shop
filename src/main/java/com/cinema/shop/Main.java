@@ -1,9 +1,11 @@
 package com.cinema.shop;
 
+import com.cinema.shop.exceptions.AuthenticationException;
 import com.cinema.shop.lib.Injector;
 import com.cinema.shop.model.CinemaHall;
 import com.cinema.shop.model.Movie;
 import com.cinema.shop.model.MovieSession;
+import com.cinema.shop.service.AuthenticationService;
 import com.cinema.shop.service.CinemaHallService;
 import com.cinema.shop.service.MovieService;
 import com.cinema.shop.service.MovieSessionService;
@@ -14,7 +16,7 @@ import java.util.List;
 public class Main {
     private static Injector injector = Injector.getInstance("com.cinema.shop");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AuthenticationException {
         Movie movie1 = new Movie();
         movie1.setTitle("Mad Max");
         movie1.setDescription("Cool men cool cars, sand everywhere");
@@ -54,5 +56,10 @@ public class Main {
         List<MovieSession> availableSessions =
                 movieSessionService.findAvailableSessions(movie2.getId(), LocalDate.now());
         availableSessions.forEach(System.out::println);
+
+        AuthenticationService authenticationService =
+                (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        authenticationService.register("chester@mail.com", "1234f");
+        System.out.println(authenticationService.login("chester@mail.com", "1234f"));
     }
 }

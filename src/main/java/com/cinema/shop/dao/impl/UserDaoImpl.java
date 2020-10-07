@@ -5,8 +5,10 @@ import com.cinema.shop.exceptions.DataProcessingException;
 import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.User;
 import com.cinema.shop.util.HibernateUtil;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 @Dao
 public class UserDaoImpl implements UserDao {
@@ -33,9 +35,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(User.class, email);
+            Query<User> query = session.createQuery("FROM User WHERE email = :email");
+            query.setParameter("email", email);
+            return query.uniqueResultOptional();
         } catch (Exception e) {
             throw new DataProcessingException("Can't get User with email " + email + "from DB", e);
         }
