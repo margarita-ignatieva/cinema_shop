@@ -26,8 +26,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public User register(String email, String password) {
         User user = new User(email, password);
-        user = userService.add(user);
-        return user;
+        return userService.add(user);
     }
 
     private boolean isValid(String password, User user) {
