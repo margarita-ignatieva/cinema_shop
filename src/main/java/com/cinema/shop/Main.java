@@ -6,8 +6,12 @@ import com.cinema.shop.model.CinemaHall;
 import com.cinema.shop.model.Movie;
 import com.cinema.shop.model.MovieSession;
 import com.cinema.shop.model.User;
-import com.cinema.shop.service.*;
-
+import com.cinema.shop.service.AuthenticationService;
+import com.cinema.shop.service.CinemaHallService;
+import com.cinema.shop.service.MovieService;
+import com.cinema.shop.service.MovieSessionService;
+import com.cinema.shop.service.ShoppingCartService;
+import com.cinema.shop.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
