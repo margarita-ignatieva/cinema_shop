@@ -5,10 +5,13 @@ import com.cinema.shop.lib.Injector;
 import com.cinema.shop.model.CinemaHall;
 import com.cinema.shop.model.Movie;
 import com.cinema.shop.model.MovieSession;
+import com.cinema.shop.model.User;
 import com.cinema.shop.service.AuthenticationService;
 import com.cinema.shop.service.CinemaHallService;
 import com.cinema.shop.service.MovieService;
 import com.cinema.shop.service.MovieSessionService;
+import com.cinema.shop.service.ShoppingCartService;
+import com.cinema.shop.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -61,5 +64,16 @@ public class Main {
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
         authenticationService.register("chester@mail.com", "1234f");
         System.out.println(authenticationService.login("chester@mail.com", "1234f"));
+
+        User shinoda = new User("mike@mail.com", "123er");
+        UserService userService = (UserService) injector.getInstance(UserService.class);
+        userService.add(shinoda);
+        ShoppingCartService shoppingCartService = (ShoppingCartService) injector
+                .getInstance(ShoppingCartService.class);
+        shoppingCartService.registerNewShoppingCart(shinoda);
+        shoppingCartService.addSession(movieSession, shinoda);
+        System.out.println(shoppingCartService.getByUser(shinoda).getTickets());
+        shoppingCartService.clear(shoppingCartService.getByUser(shinoda));
+        System.out.println(shoppingCartService.getByUser(shinoda).getTickets());
     }
 }
