@@ -13,11 +13,10 @@ import com.cinema.shop.service.MovieSessionService;
 import com.cinema.shop.service.OrderService;
 import com.cinema.shop.service.ShoppingCartService;
 import com.cinema.shop.service.UserService;
-import org.apache.log4j.Logger;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.cinema.shop");
