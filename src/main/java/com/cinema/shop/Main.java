@@ -13,12 +13,15 @@ import com.cinema.shop.service.MovieSessionService;
 import com.cinema.shop.service.OrderService;
 import com.cinema.shop.service.ShoppingCartService;
 import com.cinema.shop.service.UserService;
+import org.apache.log4j.Logger;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.cinema.shop");
+    private static final Logger log = Logger.getLogger(Main.class);
 
     public static void main(String[] args) throws AuthenticationException {
         Movie movie1 = new Movie();
@@ -30,7 +33,7 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movie1);
         movieService.add(movie2);
-        movieService.getAll().forEach(System.out::println);
+        movieService.getAll().forEach(log::info);
 
         CinemaHall cinemaHall1 = new CinemaHall();
         cinemaHall1.setCapacity(45);
@@ -42,7 +45,7 @@ public class Main {
                 (CinemaHallService)injector.getInstance(CinemaHallService.class);
         cinemaHallService.add(cinemaHall1);
         cinemaHallService.add(cinemaHall2);
-        cinemaHallService.getAll().forEach(System.out::println);
+        cinemaHallService.getAll().forEach(log::info);
 
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movie1);
@@ -59,12 +62,12 @@ public class Main {
 
         List<MovieSession> availableSessions =
                 movieSessionService.findAvailableSessions(movie2.getId(), LocalDate.now());
-        availableSessions.forEach(System.out::println);
+        availableSessions.forEach(log::info);
 
         AuthenticationService authenticationService =
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
         authenticationService.register("chester@mail.com", "1234f");
-        System.out.println(authenticationService.login("chester@mail.com", "1234f"));
+        log.info(authenticationService.login("chester@mail.com", "1234f"));
 
         User shinoda = new User("mike@mail.com", "123er");
         UserService userService = (UserService) injector.getInstance(UserService.class);
@@ -73,10 +76,10 @@ public class Main {
                 .getInstance(ShoppingCartService.class);
         shoppingCartService.registerNewShoppingCart(shinoda);
         shoppingCartService.addSession(movieSession, shinoda);
-        System.out.println(shoppingCartService.getByUser(shinoda).getTickets());
+        log.info(shoppingCartService.getByUser(shinoda).getTickets());
 
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
         orderService.completeOrder(shoppingCartService.getByUser(shinoda).getTickets(), shinoda);
-        System.out.println("Shinoda's orders: " + orderService.getOrderHistory(shinoda));
+        log.info("Shinoda's orders: " + orderService.getOrderHistory(shinoda));
     }
 }
