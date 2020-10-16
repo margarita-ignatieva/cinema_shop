@@ -7,21 +7,27 @@ import com.cinema.shop.model.Order;
 import com.cinema.shop.model.User;
 import com.cinema.shop.util.HibernateUtil;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
+    private static final Logger log = Logger.getLogger(CinemaHallDaoImpl.class);
+
     @Override
     public Order add(Order order) {
         Transaction transaction = null;
         Session session = null;
+        log.info("Trying to add Order " + order);
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.persist(order);
             transaction.commit();
+            log.info("Added Order " + order);
             return order;
         } catch (Exception e) {
             if (transaction != null) {
@@ -37,6 +43,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getOrderHistory(User user) {
+        log.info("Trying to get order history by " + user);
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Order> getOrdersQuery = session.createQuery("SELECT DISTINCT o FROM Order o "
                     + "LEFT JOIN FETCH o.tickets "

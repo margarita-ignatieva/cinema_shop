@@ -5,15 +5,19 @@ import com.cinema.shop.exceptions.DataProcessingException;
 import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.Ticket;
 import com.cinema.shop.util.HibernateUtil;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Dao
 public class TicketDaoImpl implements TicketDao {
+    private static final Logger log = Logger.getLogger(CinemaHallDaoImpl.class);
+
     @Override
     public Ticket add(Ticket ticket) {
         Transaction transaction = null;
         Session session = null;
+        log.info("Trying to add Ticket " + ticket);
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
