@@ -66,7 +66,14 @@ public class Main {
         AuthenticationService authenticationService =
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
         authenticationService.register("chester@mail.com", "1234f");
-        log.info(authenticationService.login("chester@mail.com", "1234f"));
+        log.info("Trying to log in user: "
+                + authenticationService.login("chester@mail.com", "1234f"));
+        try {
+            authenticationService.login("chester@mail.com", "1234f");
+            log.info("A user logged in.");
+        } catch (AuthenticationException e) {
+            log.warn("User failed to log in. AuthenticationException: ", e);
+        }
 
         User shinoda = new User("mike@mail.com", "123er");
         UserService userService = (UserService) injector.getInstance(UserService.class);
@@ -75,10 +82,11 @@ public class Main {
                 .getInstance(ShoppingCartService.class);
         shoppingCartService.registerNewShoppingCart(shinoda);
         shoppingCartService.addSession(movieSession, shinoda);
-        log.info(shoppingCartService.getByUser(shinoda).getTickets());
+        log.info("Trying to get user shopping cart:"
+                + shoppingCartService.getByUser(shinoda).getTickets());
 
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
         orderService.completeOrder(shoppingCartService.getByUser(shinoda).getTickets(), shinoda);
-        log.info("Shinoda's orders: " + orderService.getOrderHistory(shinoda));
+        log.info("Trying to get user orders: " + orderService.getOrderHistory(shinoda));
     }
 }
