@@ -22,7 +22,7 @@ public class Main {
     private static Injector injector = Injector.getInstance("com.cinema.shop");
     private static final Logger log = Logger.getLogger(Main.class);
 
-    public static void main(String[] args) throws AuthenticationException {
+    public static void main(String[] args) {
         Movie movie1 = new Movie();
         movie1.setTitle("Mad Max");
         movie1.setDescription("Cool men cool cars, sand everywhere");
@@ -66,8 +66,6 @@ public class Main {
         AuthenticationService authenticationService =
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
         authenticationService.register("chester@mail.com", "1234f");
-        log.info("Trying to log in user: "
-                + authenticationService.login("chester@mail.com", "1234f"));
         try {
             authenticationService.login("chester@mail.com", "1234f");
             log.info("A user logged in.");
