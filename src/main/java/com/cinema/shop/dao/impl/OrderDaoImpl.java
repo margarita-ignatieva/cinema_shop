@@ -7,7 +7,6 @@ import com.cinema.shop.model.Order;
 import com.cinema.shop.model.User;
 import com.cinema.shop.util.HibernateUtil;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,7 +14,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
-    private static final Logger log = Logger.getLogger(CinemaHallDaoImpl.class);
+    private static final Logger log = Logger.getLogger(OrderDaoImpl.class);
 
     @Override
     public Order add(Order order) {

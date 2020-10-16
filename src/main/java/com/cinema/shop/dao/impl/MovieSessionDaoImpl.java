@@ -8,7 +8,6 @@ import com.cinema.shop.util.HibernateUtil;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,7 +15,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
-    private static final Logger log = Logger.getLogger(CinemaHallDaoImpl.class);
+    private static final Logger log = Logger.getLogger(MovieSessionDaoImpl.class);
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {

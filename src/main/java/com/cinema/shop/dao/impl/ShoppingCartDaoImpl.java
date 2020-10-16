@@ -13,7 +13,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
-    private static final Logger log = Logger.getLogger(CinemaHallDaoImpl.class);
+    private static final Logger log = Logger.getLogger(ShoppingCartDaoImpl.class);
 
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {

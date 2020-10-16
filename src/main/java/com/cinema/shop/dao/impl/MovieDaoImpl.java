@@ -7,14 +7,13 @@ import com.cinema.shop.model.Movie;
 import com.cinema.shop.util.HibernateUtil;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final Logger log = Logger.getLogger(CinemaHallDaoImpl.class);
+    private static final Logger log = Logger.getLogger(MovieDaoImpl.class);
 
     @Override
     public Movie add(Movie movie) {

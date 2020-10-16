@@ -6,7 +6,6 @@ import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.User;
 import com.cinema.shop.util.HibernateUtil;
 import java.util.Optional;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,7 +13,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class UserDaoImpl implements UserDao {
-    private static final Logger log = Logger.getLogger(CinemaHallDaoImpl.class);
+    private static final Logger log = Logger.getLogger(UserDaoImpl.class);
 
     @Override
     public User add(User user) {

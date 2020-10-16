@@ -7,7 +7,6 @@ import com.cinema.shop.model.CinemaHall;
 import com.cinema.shop.util.HibernateUtil;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
