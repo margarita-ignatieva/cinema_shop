@@ -2,18 +2,24 @@ package com.cinema.shop.dao.impl;
 
 import com.cinema.shop.dao.ShoppingCartDao;
 import com.cinema.shop.exceptions.DataProcessingException;
-import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.ShoppingCart;
 import com.cinema.shop.model.User;
-import com.cinema.shop.util.HibernateUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
     private static final Logger log = Logger.getLogger(ShoppingCartDaoImpl.class);
+
+    private final SessionFactory sessionFactory;
+
+    public ShoppingCartDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
@@ -21,7 +27,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
         Session session = null;
         log.info("Trying to add Shopping Cart " + shoppingCart);
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(shoppingCart);
             transaction.commit();
@@ -42,7 +48,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public ShoppingCart getByUser(User user) {
         log.info("Trying to get " + user + " Shopping Cart ");
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<ShoppingCart> query = session.createQuery("FROM ShoppingCart sc"
                     + " join fetch sc.user"
                     + " left join fetch sc.tickets"
@@ -61,7 +67,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
         Session session = null;
         log.info("Trying to update Shopping Cart " + shoppingCart);
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.update(shoppingCart);
             transaction.commit();

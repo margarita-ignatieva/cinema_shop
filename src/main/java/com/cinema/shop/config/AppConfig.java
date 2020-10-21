@@ -47,7 +47,8 @@ public class AppConfig {
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         factoryBean.setHibernateProperties(properties);
-        factoryBean.setAnnotatedClasses(User.class, Ticket.class, Movie.class, MovieSession.class, ShoppingCart.class);
+        factoryBean.setAnnotatedClasses(User.class, Ticket.class, Movie.class,
+                MovieSession.class, ShoppingCart.class, CinemaHall.class, Order.class);
         return factoryBean;
     }
 
