@@ -1,7 +1,7 @@
 package com.cinema.shop;
 
+import com.cinema.shop.config.AppConfig;
 import com.cinema.shop.exceptions.AuthenticationException;
-import com.cinema.shop.lib.Injector;
 import com.cinema.shop.model.CinemaHall;
 import com.cinema.shop.model.Movie;
 import com.cinema.shop.model.MovieSession;
@@ -17,19 +17,29 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("com.cinema.shop");
     private static final Logger log = Logger.getLogger(Main.class);
+    private static final AnnotationConfigApplicationContext context =
+            new AnnotationConfigApplicationContext(AppConfig.class);
+    private static final UserService userService = context.getBean(UserService.class);
+    private static final MovieService movieService = context.getBean(MovieService.class);
+    private static final CinemaHallService cinemaHallService = context.getBean(CinemaHallService.class);
+    private static final MovieSessionService movieSessionService = context.getBean(MovieSessionService.class);
+    private static final AuthenticationService authenticationService = context.getBean(AuthenticationService.class);
+    private static final ShoppingCartService shoppingCartService = context.getBean(ShoppingCartService.class);
+    private static final OrderService orderService = context.getBean(OrderService.class);
+
 
     public static void main(String[] args) {
+
         Movie movie1 = new Movie();
         movie1.setTitle("Mad Max");
         movie1.setDescription("Cool men cool cars, sand everywhere");
         Movie movie2 = new Movie();
         movie2.setTitle("Terminator 2");
         movie2.setDescription("I AM BACK");
-        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.add(movie1);
         movieService.add(movie2);
         movieService.getAll().forEach(log::info);
@@ -40,8 +50,6 @@ public class Main {
         CinemaHall cinemaHall2 = new CinemaHall();
         cinemaHall2.setCapacity(80);
         cinemaHall2.setDescription("IMAX has never ever been closer");
-        CinemaHallService cinemaHallService =
-                (CinemaHallService)injector.getInstance(CinemaHallService.class);
         cinemaHallService.add(cinemaHall1);
         cinemaHallService.add(cinemaHall2);
         cinemaHallService.getAll().forEach(log::info);
@@ -54,8 +62,6 @@ public class Main {
         movieSession2.setMovie(movie2);
         movieSession2.setCinemaHall(cinemaHall2);
         movieSession2.setShowTime(LocalDateTime.now());
-        MovieSessionService movieSessionService =
-                (MovieSessionService) injector.getInstance(MovieSessionService.class);
         movieSessionService.add(movieSession);
         movieSessionService.add(movieSession2);
 
@@ -63,8 +69,6 @@ public class Main {
                 movieSessionService.findAvailableSessions(movie2.getId(), LocalDate.now());
         availableSessions.forEach(log::info);
 
-        AuthenticationService authenticationService =
-                (AuthenticationService) injector.getInstance(AuthenticationService.class);
         authenticationService.register("chester@mail.com", "1234f");
         try {
             authenticationService.login("chester@mail.com", "1234f");
@@ -74,16 +78,12 @@ public class Main {
         }
 
         User shinoda = new User("mike@mail.com", "123er");
-        UserService userService = (UserService) injector.getInstance(UserService.class);
         userService.add(shinoda);
-        ShoppingCartService shoppingCartService = (ShoppingCartService) injector
-                .getInstance(ShoppingCartService.class);
         shoppingCartService.registerNewShoppingCart(shinoda);
         shoppingCartService.addSession(movieSession, shinoda);
         log.info("Trying to get user shopping cart:"
                 + shoppingCartService.getByUser(shinoda).getTickets());
 
-        OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
         orderService.completeOrder(shoppingCartService.getByUser(shinoda).getTickets(), shinoda);
         log.info("Trying to get user orders: " + orderService.getOrderHistory(shinoda));
     }
