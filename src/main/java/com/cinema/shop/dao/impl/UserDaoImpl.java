@@ -2,9 +2,7 @@ package com.cinema.shop.dao.impl;
 
 import com.cinema.shop.dao.UserDao;
 import com.cinema.shop.exceptions.DataProcessingException;
-import com.cinema.shop.lib.Dao;
 import com.cinema.shop.model.User;
-import com.cinema.shop.util.HibernateUtil;
 import java.util.Optional;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

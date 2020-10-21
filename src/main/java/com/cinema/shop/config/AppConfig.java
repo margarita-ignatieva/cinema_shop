@@ -1,6 +1,7 @@
 package com.cinema.shop.config;
 
-import com.cinema.shop.model.*;
+import java.util.Properties;
+import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,9 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-
-import javax.sql.DataSource;
-import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -47,8 +45,7 @@ public class AppConfig {
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         factoryBean.setHibernateProperties(properties);
-        factoryBean.setAnnotatedClasses(User.class, Ticket.class, Movie.class,
-                MovieSession.class, ShoppingCart.class, CinemaHall.class, Order.class);
+        factoryBean.setPackagesToScan("com.cinema.shop.model");
         return factoryBean;
     }
 

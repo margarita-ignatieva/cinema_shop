@@ -25,12 +25,15 @@ public class Main {
             new AnnotationConfigApplicationContext(AppConfig.class);
     private static final UserService userService = context.getBean(UserService.class);
     private static final MovieService movieService = context.getBean(MovieService.class);
-    private static final CinemaHallService cinemaHallService = context.getBean(CinemaHallService.class);
-    private static final MovieSessionService movieSessionService = context.getBean(MovieSessionService.class);
-    private static final AuthenticationService authenticationService = context.getBean(AuthenticationService.class);
-    private static final ShoppingCartService shoppingCartService = context.getBean(ShoppingCartService.class);
+    private static final CinemaHallService cinemaHallService =
+            context.getBean(CinemaHallService.class);
+    private static final MovieSessionService movieSessionService =
+            context.getBean(MovieSessionService.class);
+    private static final AuthenticationService authenticationService =
+            context.getBean(AuthenticationService.class);
+    private static final ShoppingCartService shoppingCartService =
+            context.getBean(ShoppingCartService.class);
     private static final OrderService orderService = context.getBean(OrderService.class);
-
 
     public static void main(String[] args) {
 
