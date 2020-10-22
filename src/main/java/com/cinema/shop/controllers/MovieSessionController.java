@@ -7,7 +7,6 @@ import com.cinema.shop.service.MovieSessionService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/movie-sessions")
 public class MovieSessionController {
-
-    @Autowired
     private MovieSessionService movieSessionService;
-
-    @Autowired
     private MovieSessionMapper movieSessionMapper;
+
+    public MovieSessionController(MovieSessionService movieSessionService,
+                                  MovieSessionMapper movieSessionMapper) {
+        this.movieSessionService = movieSessionService;
+        this.movieSessionMapper = movieSessionMapper;
+    }
 
     @PostMapping
     public void addMovieSessionDto(@RequestBody MovieSessionRequestDto requestDto) {
