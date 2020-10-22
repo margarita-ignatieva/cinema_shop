@@ -3,8 +3,6 @@ package com.cinema.shop.mappers;
 import com.cinema.shop.model.Movie;
 import com.cinema.shop.model.dto.MovieRequestDto;
 import com.cinema.shop.model.dto.MovieResponseDto;
-import com.cinema.shop.service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
