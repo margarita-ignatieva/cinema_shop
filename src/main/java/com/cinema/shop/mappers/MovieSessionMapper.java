@@ -32,7 +32,7 @@ public class MovieSessionMapper {
         movieSessionResponseDto.setId(movieSession.getId());
         movieSessionResponseDto.setCinemaHallId(movieSession.getCinemaHall().getId());
         movieSessionResponseDto.setMovieId(movieSession.getMovie().getId());
-        movieSessionResponseDto.setSessionTime(movieSession.getShowTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        movieSessionResponseDto.setShowTime(movieSession.getShowTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         return movieSessionResponseDto;
     }
 }

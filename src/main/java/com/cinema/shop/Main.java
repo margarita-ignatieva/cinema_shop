@@ -15,6 +15,7 @@ import com.cinema.shop.service.ShoppingCartService;
 import com.cinema.shop.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -89,5 +90,7 @@ public class Main {
 
         orderService.completeOrder(shoppingCartService.getByUser(shinoda).getTickets(), shinoda);
         log.info("Trying to get user orders: " + orderService.getOrderHistory(shinoda));
+
+        log.info(movieSession2.getShowTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
     }
 }
