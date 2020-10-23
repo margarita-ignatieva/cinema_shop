@@ -8,5 +8,5 @@ public interface CinemaHallDao {
 
     List<CinemaHall> getAll();
 
-    CinemaHall findById(Long id);
+    CinemaHall getdById(Long id);
 }
