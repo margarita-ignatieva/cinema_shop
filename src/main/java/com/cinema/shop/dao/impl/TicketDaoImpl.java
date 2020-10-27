@@ -40,4 +40,11 @@ public class TicketDaoImpl implements TicketDao {
             }
         }
     }
+
+    @Override
+    public Ticket getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Ticket.class, id);
+        }
+    }
 }
