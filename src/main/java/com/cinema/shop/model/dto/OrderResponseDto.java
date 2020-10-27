@@ -1,7 +1,7 @@
 package com.cinema.shop.model.dto;
 
-import lombok.Data;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class OrderResponseDto {
