@@ -46,7 +46,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart getByUser(User user) {
-        log.info("Trying to get " + user + " Shopping Cart ");
+        log.info("Trying to getById " + user + " Shopping Cart ");
         try (Session session = sessionFactory.openSession()) {
             Query<ShoppingCart> query = session.createQuery("FROM ShoppingCart sc"
                     + " join fetch sc.user"
@@ -55,7 +55,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             query.setParameter("id", user.getId());
             return query.getSingleResult();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get Shopping Cart with User  "
+            throw new DataProcessingException("Can't getById Shopping Cart with User  "
                     + user + "from DB", e);
         }
     }

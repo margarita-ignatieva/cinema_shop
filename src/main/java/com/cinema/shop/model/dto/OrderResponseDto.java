@@ -7,6 +7,6 @@ import lombok.Data;
 public class OrderResponseDto {
     private Long id;
     private List<Long> ticketIds;
-    private String orderData;
+    private String orderDate;
     private Long userId;
 }

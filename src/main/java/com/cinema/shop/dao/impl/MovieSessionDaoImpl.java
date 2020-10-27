@@ -66,7 +66,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     }
 
     @Override
-    public MovieSession get(Long movieSessionId) {
+    public MovieSession getById(Long movieSessionId) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(MovieSession.class, movieSessionId);
         }

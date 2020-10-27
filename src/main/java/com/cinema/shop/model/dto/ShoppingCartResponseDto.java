@@ -7,5 +7,4 @@ import lombok.Data;
 public class ShoppingCartResponseDto {
     private Long id;
     private List<Long> ticketIds;
-    private Long userId;
 }

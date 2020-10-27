@@ -9,5 +9,5 @@ public interface MovieSessionDao {
 
     MovieSession add(MovieSession session);
 
-    MovieSession get(Long movieSessionId);
+    MovieSession getById(Long movieSessionId);
 }

@@ -26,7 +26,7 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     }
 
     @Override
-    public MovieSession get(Long movieSessionId) {
-        return movieSessionDao.get(movieSessionId);
+    public MovieSession getById(Long movieSessionId) {
+        return movieSessionDao.getById(movieSessionId);
     }
 }
