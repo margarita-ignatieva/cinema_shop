@@ -46,14 +46,14 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public List<Movie> getAll() {
-        log.info("Trying to get all Movies");
+        log.info("Trying to getById all Movies");
         try (Session session = sessionFactory.openSession()) {
             CriteriaQuery<Movie> criteriaQuery = session.getCriteriaBuilder()
                     .createQuery(Movie.class);
             criteriaQuery.from(Movie.class);
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movies from DB", e);
+            throw new DataProcessingException("Can't getById movies from DB", e);
         }
     }
 

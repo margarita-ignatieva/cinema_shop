@@ -46,14 +46,14 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
 
     @Override
     public List<CinemaHall> getAll() {
-        log.info("Trying to get all Cinema Halls");
+        log.info("Trying to getById all Cinema Halls");
         try (Session session = sessionFactory.openSession()) {
             CriteriaQuery<CinemaHall> criteriaQuery = session.getCriteriaBuilder()
                     .createQuery(CinemaHall.class);
             criteriaQuery.from(CinemaHall.class);
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get Cinema Halls from DB", e);
+            throw new DataProcessingException("Can't getById Cinema Halls from DB", e);
         }
     }
 

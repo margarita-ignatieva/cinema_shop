@@ -52,7 +52,15 @@ public class UserDaoImpl implements UserDao {
             query.setParameter("email", email);
             return query.uniqueResultOptional();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get User with email " + email + "from DB", e);
+            throw new DataProcessingException("Can't getById User with email "
+                    + email + "from DB", e);
+        }
+    }
+
+    @Override
+    public User getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(User.class, id);
         }
     }
 }

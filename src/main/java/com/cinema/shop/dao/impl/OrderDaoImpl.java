@@ -47,7 +47,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getOrderHistory(User user) {
-        log.info("Trying to get order history by " + user);
+        log.info("Trying to getById order history by " + user);
         try (Session session = sessionFactory.openSession()) {
             Query<Order> getOrdersQuery = session.createQuery("SELECT DISTINCT o FROM Order o "
                     + "LEFT JOIN FETCH o.tickets "
@@ -55,7 +55,7 @@ public class OrderDaoImpl implements OrderDao {
             getOrdersQuery.setParameter("user", user);
             return getOrdersQuery.getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get all orders by user: "
+            throw new DataProcessingException("Can't getById all orders by user: "
                     + user, e);
         }
     }
