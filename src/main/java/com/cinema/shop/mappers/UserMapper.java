@@ -1,7 +1,6 @@
 package com.cinema.shop.mappers;
 
 import com.cinema.shop.model.User;
-import com.cinema.shop.model.dto.UserRequestDto;
 import com.cinema.shop.model.dto.UserResponseDto;
 import org.springframework.stereotype.Component;
 

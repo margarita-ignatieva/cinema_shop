@@ -12,7 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authenticationBuilder) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder authenticationBuilder)
+            throws Exception {
         authenticationBuilder.inMemoryAuthentication()
                 .passwordEncoder(getEncoder())
                 .withUser("user").password(getEncoder().encode("1234")).roles("USER");
