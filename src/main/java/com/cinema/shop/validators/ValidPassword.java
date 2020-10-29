@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidPassword {
-    String message() default "Password repeated is not equal to the password";
+    String message() default "Password repeated is not identical to the original password";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

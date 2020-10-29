@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidEmail {
-    String message() default "Email is not of a valid representation";
+    String message() default "Email is not of a valid format";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
