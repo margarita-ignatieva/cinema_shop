@@ -3,24 +3,23 @@ package com.cinema.shop.service.impl;
 import com.cinema.shop.dao.UserDao;
 import com.cinema.shop.model.User;
 import com.cinema.shop.service.UserService;
-import com.cinema.shop.util.HashUtil;
 import java.util.Optional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User add(User user) {
-        byte [] salt = HashUtil.getSalt();
-        String hashedPassword = HashUtil.hashPassword(user.getPassword(), salt);
-        user.setPassword(hashedPassword);
-        user.setSalt(salt);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.add(user);
     }
 
